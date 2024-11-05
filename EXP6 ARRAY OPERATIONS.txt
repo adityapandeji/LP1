@@ -1,0 +1,67 @@
+let array = [];
+function createArrayInputs() {
+    const arrayLength = parseInt(document.getElementById("arrayLength").value);
+    const arrayInputsDiv = document.getElementById("arrayInputs");
+    arrayInputsDiv.innerHTML = '';
+    for (let i = 0; i < arrayLength; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = `arrayElement${i}`;
+        input.placeholder = `Enter value ${i + 1}`;
+        arrayInputsDiv.appendChild(input);
+        arrayInputsDiv.appendChild(document.createElement('br'));
+    }
+}
+function performOperations() {
+    const arrayLength = parseInt(document.getElementById("arrayLength").value);
+    let deleteElement = document.getElementById("deleteElement").value;
+    let checkElement = document.getElementById("checkElement").value;
+    array = [];
+    for (let i = 0; i < arrayLength; i++) {
+        let value = document.getElementById(`arrayElement${i}`).value;
+        array.push(value);
+    }
+    document.getElementById("originalArray").innerText = "Original Array: " + array.join(", ");
+    array = array.filter(item => item !== deleteElement);
+    document.getElementById("modifiedArray").innerText = "Array after Deletion: " + array.join(", ");
+    let contains = array.includes(checkElement);
+    document.getElementById("checkResult").innerText = "Contains " + checkElement + ": " + contains;
+}
+function emptyArray() {
+    array = [];
+    document.getElementById("arrayStatus").innerText = "Array is now empty.";
+    document.getElementById("originalArray").innerText = "";
+    document.getElementById("modifiedArray").innerText = "";
+    document.getElementById("checkResult").innerText = "";
+    document.getElementById("arrayInputs").innerHTML = "";
+    document.getElementById("arrayLength").value = "";
+}
+
+INDEX.HTML
+
+ <!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Array Operations</title> 
+</head> 
+<body style="text-align: center;"> 
+<h1>JavaScript Array Operations</h1> 
+<label for="arrayLength">Enter Array Length:</label> 
+<input type="number" id="arrayLength" min="1" onchange="createArrayInputs()"><br><br> 
+<div id="arrayInputs"></div> 
+<label for="deleteElement">Enter Element to Delete:</label> 
+<input type="text" id="deleteElement"><br><br> 
+<label for="checkElement">Enter Element to Check:</label> 
+<input type="text" id="checkElement"><br><br> 
+<button onclick="performOperations()">Perform Operations</button> 
+<button onclick="emptyArray()">Empty Array</button><br><br> 
+<p id="originalArray"></p> 
+<p id="modifiedArray"></p> 
+<p id="checkResult"></p> 
+<p id="arrayStatus"></p> 
+<script src="script.js"></script> 
+</body> 
+</html> 
+

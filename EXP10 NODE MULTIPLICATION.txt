@@ -1,0 +1,80 @@
+// Function to print multiplication table using a for loop 
+function forLoopTable(num) {
+    let result = `<h2>Multiplication Table of ${num} (using For loop):</h2>`;
+    for (let i = 1; i <= 10; i++) {
+        result += `<p>${num} x ${i} = ${num * i}</p>`;
+    }
+    return result;
+}
+
+// Function to print multiplication table using a while loop 
+function whileLoopTable(num) {
+    let result = `<h2>Multiplication Table of ${num} (using While loop):</h2>`;
+    let i = 1;
+    while (i <= 10) {
+        result += `<p>${num} x ${i} = ${num * i}</p>`;
+        i++;
+    }
+    return result;
+}
+
+// Function to print multiplication table using a do-while loop 
+function doWhileLoopTable(num) {
+    let result = `<h2>Multiplication Table of ${num} (using Do-While loop):</h2>`;
+    let i = 1;
+    do {
+        result += `<p>${num} x ${i} = ${num * i}</p>`;
+        i++;
+    } while (i <= 10);
+    return result;
+}
+
+// Function to generate the table and display it on the page
+function generateTable() {
+    let number = prompt("Enter a number to print its multiplication table: ");
+    let outputDiv = document.getElementById('output');
+
+    // Validate input to ensure it's a number 
+    if (!isNaN(number) && number.trim() !== "") {
+        number = parseInt(number);
+
+        // Combine results from all the loop tables
+        let result = forLoopTable(number);
+        result += whileLoopTable(number);
+        result += doWhileLoopTable(number);
+
+        // Display the result in the output div
+        outputDiv.innerHTML = result;
+    } else {
+        outputDiv.innerHTML = "<p>Please enter a valid number.</p>";
+    }
+}
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .result {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiplication Table</h1>
+    <button onclick="generateTable()">Enter a number to print the table</button>
+    <div id="output" class="result"></div>
+
+</head>
+<body>

@@ -1,0 +1,53 @@
+INDEX.HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Comparison</title>
+    <script>
+        function compareStrings() {
+            const str1 = document.getElementById("string1").value;
+            const str2 = document.getElementById("string2").value;
+            let result = "";
+            if (str1 && str2) {
+                if (str1.length === str2.length) {
+                    result += `<strong>Equality Check(==):</strong> ${str1 == str2 ? "Equal" : "Not Equal"}<br>`;
+                } else {
+                }
+                result += `<strong>Equality Check(==):</strong> Lengths are different, cannot compare using ==<br>`;
+                result += `<strong>Equality Check(===):</strong> ${str1 === str2 ? "Equal" : "Not Equal"}<br>`;
+                const localeComparison = str1.localeCompare(str2);
+                if (localeComparison === 0) {
+                    result += `<strong>Local Compare:</strong> Equal<br>`;
+                } else if (localeComparison < 0) {
+                    result += `<strong>Local Compare:</strong> "${str1}" comes before "${str2}"<br>`;
+                } else {
+                    result += `<strong>Local Compare:</strong> "${str1}" comes after "${str2}"<br>`;
+                }
+            } else {
+                result += `<strong>Enter strings</strong>`;
+            }
+            document.getElementById("results").innerHTML = result;
+        }
+    </script>
+</head>
+
+<body style="text-align: center">
+    <h1>Compare Two Strings</h1>
+    <form id="comparisonForm">
+        <label for="string1">String 1:</label>
+        <input type="text" id="string1" name="string1" required>
+        <br><br>
+        <label for="string2">String 2:</label>
+        <input type="text" id="string2" name="string2" required>
+        <br><br>
+        <button type="button" onclick="compareStrings()">Compare</button>
+    </form>
+    <h2>Results:</h2>
+    <p id="results"></p>
+    <script src="script.js"></script>
+</body>
+
+</html>

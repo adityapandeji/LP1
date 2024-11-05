@@ -1,0 +1,160 @@
+SCRIPT.JS
+function generateTableFor(number) {
+    let result = '<p>Multiplication Table using <strong>for loop</strong>:</p>';
+    for (let i = 1; i <= 10; i++) {
+        result += `${number} x ${i} = ${number * i}<br>`;
+    }
+    return result;
+}
+function generateTableWhile(number) {
+    let result = '<p>Multiplication Table using <strong>while loop</strong>:</p>';
+    let i = 1;
+    while (i <= 10) {
+        result += `${number} x ${i} = ${number * i}<br>`;
+        i++;
+    }
+    return result;
+}
+function generateTableDoWhile(number) {
+    let result = '<p>Multiplication Table using <strong>do-while loop</strong>:</p>';
+    let i = 1;
+    do {
+        result += `${number} x ${i} = ${number * i}<br>`;
+        i++;
+    } while (i <= 10);
+    return result;
+}
+function generateAllTables() {
+    const numberInput = document.getElementById('number-input');
+    const number = numberInput.value;
+    if (number === '') {
+        alert('Please enter a number');
+        return;
+    }
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = '';
+    let forLoopResult = generateTableFor(number);
+    let whileLoopResult = generateTableWhile(number);
+    let doWhileLoopResult = generateTableDoWhile(number);
+    resultDiv.innerHTML = forLoopResult + '<br>' + whileLoopResult + '<br>' + doWhileLoopResult;
+    numberInput.value = '';
+}
+// Additional functions to handle button clicks for individual loop types 
+function generateTableForButton() {
+    const numberInput = document.getElementById('number-input');
+    const number = numberInput.value;
+    if (number === '') {
+        alert('Please enter a number');
+        return;
+    }
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = generateTableFor(number);
+}
+function generateTableWhileButton() {
+    const numberInput = document.getElementById('number-input');
+    const number = numberInput.value;
+    if (number === '') {
+        alert('Please enter a number');
+        return;
+    }
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = generateTableWhile(number);
+}
+function generateTableDoWhileButton() {
+    const numberInput = document.getElementById('number-input');
+    const number = numberInput.value;
+    if (number === '') {
+        alert('Please enter a number');
+        return;
+    }
+    let resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = generateTableDoWhile(number);
+}
+
+INDEX.HTML
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <script src="scripts.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #6f4ac7;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+             margin-right: 5px;
+        margin-bottom: 10px;
+
+        }
+
+       
+        button:hover {
+            background-color: #4ab8c7;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Multiplication Table Generator</h1>
+    <div class="center">
+        <label for="number-input">Enter a Number:</label>
+        <input type="number" id="number-input" min="0"><br>
+        <!-- <button onclick="generateAllTables()">Generate All Tables</button> -->
+        <button onclick="generateTableForButton()">Generate For Table</button>
+        <button onclick="generateTableWhileButton()">Generate While Table</button>
+        <button onclick="generateTableDoWhileButton()">Generate Do-While Table</button>
+        <button onclick="generateAllTables()">Generate All Table</button>
+    </div>
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

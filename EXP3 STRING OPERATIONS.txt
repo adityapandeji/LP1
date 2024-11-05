@@ -1,0 +1,95 @@
+SCRIPT.JS
+function reverseString() {
+    const inputStr = document.getElementById('inputString').value;
+    let reversedStr = inputStr.split('').reverse().join('');
+    let reversedStrWithoutMethods = '';
+    for (let i = inputStr.length - 1; i >= 0; i--) {
+        reversedStrWithoutMethods += inputStr[i];
+    }
+    document.getElementById('result').innerHTML = `<strong>Reversed (with methods):</strong> ${reversedStr}<br> 
+                <strong>Reversed (without methods):</strong> ${reversedStrWithoutMethods}`;
+}
+function replaceSubstring() {
+    const inputStr = document.getElementById('replaceInputString').value;
+    const substring = document.getElementById('substring').value;
+    const newSubstring = document.getElementById('newSubstring').value;
+    let replacedStr = inputStr.replace(new RegExp(substring, 'g'), newSubstring);
+    let replacedStrWithoutMethods = '';
+    for (let i = 0; i < inputStr.length; i++) {
+        let match = true;
+        for (let j = 0; j < substring.length; j++) {
+            if (inputStr[i + j] !== substring[j]) {
+                match = false;
+                break;
+            }
+        }
+        if (match) {
+            replacedStrWithoutMethods += newSubstring;
+            i += substring.length - 1;
+        } else {
+            replacedStrWithoutMethods += inputStr[i];
+        }
+    }
+    document.getElementById('result').innerHTML = ` 
+<strong>Replaced (with methods):</strong> ${replacedStr}<br> 
+<strong>Replaced (without methods):</strong> ${replacedStrWithoutMethods} 
+`;
+}
+function checkPalindrome() {
+    const inputStr = document.getElementById('palindromeInput').value;
+    const reversedStr = inputStr.split('').reverse().join('');
+    const isPalindrome = inputStr === reversedStr;
+    let isPalindromeWithoutMethods = true;
+    for (let i = 0; i < inputStr.length / 2; i++) {
+        if (inputStr[i] !== inputStr[inputStr.length - 1 - i]) {
+            isPalindromeWithoutMethods = false;
+            break;
+        }
+    }
+    document.getElementById('result').innerHTML = ` 
+<strong>Palindrome check (with methods):</strong> ${isPalindrome ? 'Palindrome' : 'Not a palindrome'}<br> 
+<strong>Palindrome check (without methods):</strong> ${isPalindromeWithoutMethods ? 'Palindrome' :
+            'Not a palindrome'}` ; 
+}
+
+
+INDEX.HTML
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+
+    
+</head>
+
+<body style="text-align: center">
+    <div class="container">
+        <h2>String Operations</h2>
+        <input type="text" id="inputString" placeholder="Enter string to reverse">
+        <p></p>
+        <button onclick="reverseString()">Reverse String</button>
+        <p></p>
+        <input type="text" id="replaceInputString" placeholder="Enter string for substring replacement">
+        <p></p>
+        <input type="text" id="substring" placeholder="Substring to replace">
+        <p></p>
+        <input type="text" id="newSubstring" placeholder="New substring">
+        <p></p>
+        <button onclick="replaceSubstring()">Replace Substring</button>
+        <p></p>
+        <input type="text" id="palindromeInput" placeholder="Enter string to check palindrome">
+        <p></p>
+        <button onclick="checkPalindrome()">Check Palindrome</button>
+        <p></p>
+        <div class="result" id="result"></div>
+    </div>
+ 
+    <script src="script.js"></script>
+</body>
+
+</html>
+

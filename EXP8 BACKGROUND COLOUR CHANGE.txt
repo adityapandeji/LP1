@@ -1,0 +1,50 @@
+
+let colors = ['#66ccff', '#3422cc']; 
+let currentColorIndex = 0; 
+document.getElementById('hoverBox').addEventListener('mouseover', function () { 
+document.body.style.backgroundColor = '#4522'; 
+}); 
+document.getElementById('hoverBox').addEventListener('mouseout', function () { 
+document.body.style.backgroundColor = ''; 
+}); 
+document.getElementById('focusInput').addEventListener('focus', function () { 
+document.body.style.backgroundColor = '#00453'; 
+}); 
+document.getElementById('focusInput').addEventListener('blur', function () { 
+document.body.style.backgroundColor = ''; 
+}); 
+document.getElementById('focusInput').addEventListener('click', function () { 
+currentColorIndex = (currentColorIndex + 1) % colors.length; 
+document.body.style.backgroundColor = colors[currentColorIndex]; 
+});
+
+INDEX.HTML
+
+HTML 
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Home Page Background Color Change</title> 
+<style> 
+#hoverBox { 
+width: 300px; 
+height: 300px; 
+background-color: lightblue; 
+margin: 50px auto; 
+} 
+input { 
+padding: 10px; 
+font-size: 16px; 
+margin-top: 20px; 
+} 
+</style> 
+</head> 
+<body style="text-align: center;"> 
+<h1>Home Page</h1> 
+<div id="hoverBox"></div> 
+<button id="focusInput">Click to change color</button> 
+<script src="script.js"></script> 
+</body> 
+</html> 

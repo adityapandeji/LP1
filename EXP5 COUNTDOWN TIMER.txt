@@ -1,0 +1,61 @@
+function startCountdown() { 
+    const dateInput = document.getElementById('dateInput').value; 
+    const hours = document.getElementById('hours').value || 0; 
+    const minutes = document.getElementById('minutes').value || 0; 
+    const seconds = document.getElementById('seconds').value || 0; 
+    const countdownElement = document.getElementById('timeRemaining'); 
+    const messageElement = document.getElementById('message'); 
+    clearInterval(countdownElement.countdownInterval); 
+    countdownElement.textContent = ''; 
+    const targetDate = new Date(dateInput); 
+    targetDate.setHours(hours); 
+    targetDate.setMinutes(minutes); 
+    targetDate.setSeconds(seconds); 
+    if (!dateInput || targetDate.getTime() <= Date.now()) { 
+    messageElement.textContent = 'Please enter a valid future date and time.'; 
+    countdownElement.textContent = ''; 
+    return; 
+    } 
+    messageElement.textContent = ''; 
+    countdownElement.countdownInterval = setInterval(() => { 
+    const now = new Date().getTime(); 
+    const distance = targetDate.getTime() - now; 
+    if (distance <= 0) { 
+    clearInterval(countdownElement.countdownInterval); 
+    countdownElement.textContent = 'Countdown finished!'; 
+    return; 
+    } 
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24)); 
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); 
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)); 
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000); 
+    countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`; 
+    }, 1000); 
+    }
+
+INDEX.HTML
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>Countdown Timer</title> 
+<link rel="stylesheet" href="style.css"> 
+</head> 
+<body style="text-align: center"> 
+<h1>Countdown Timer</h1> 
+<label for="dateInput">Enter a future date (YYYY-MM-DD):</label> 
+<input type="date" id="dateInput"><br><br> 
+<label for="timeInput">Enter time (HH:MM:SS):</label> 
+<input type="number" id="hours" min="0" max="23" placeholder="HH" style="width: 50px;"> 
+<input type="number" id="minutes" min="0" max="59" placeholder="MM" style="width: 50px;"> 
+<input type="number" id="seconds" min="0" max="59" placeholder="SS" style="width: 50px;"><br><br> 
+<button onclick="startCountdown()">Start Countdown</button> 
+<div id="countdown"> 
+<p id="message"></p> 
+<p id="timeRemaining"></p> 
+</div> 
+<script src="script.js"></script> 
+</body> 
+</html> 
